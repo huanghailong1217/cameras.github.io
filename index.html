@@ -42,8 +42,8 @@
            type: "LiveStream",
            target: document.querySelector('.hello'),
            constraints: {
-             width: { min: 640 },
-             height: { min: 480 },
+             width: { min: 340 },
+             height: { min: 300 },
              facingMode: "environmentd",
              aspectRatio: { min: 1, max: 2 }
            }
@@ -52,7 +52,7 @@
            patchSize: "medium",
            halfSample: true
          },
-         numOfWorkers: 2,
+         numOfWorkers: 1,
          frequency: 10,
          decoder: {
            readers: [{
@@ -68,6 +68,10 @@
         }
         console.log("Initialization finished. Ready to start");
         Quagga.start();
+        Quagga.onDetected(function (data) {
+          console.log(data)
+          alert(data.codeResult.code)
+        })
       });
     },false)
    
