@@ -25,6 +25,7 @@
     </div>
 
     <video id="video" autoplay playsinline></video>
+    <div class="hello"></div>
   </main>
 
   <footer>
@@ -39,7 +40,7 @@
        Quagga.init({
       inputStream: {
            type: "LiveStream",
-           target: document.querySelector('#video'),
+           target: document.querySelector('.hello'),
            constraints: {
              width: { min: 640 },
              height: { min: 480 },
