@@ -20,7 +20,7 @@
     <div class="controls">
       <button id="button">Get camera</button>
       <select id="select">
-        <option></option>
+        
       </select>
     </div>
 
@@ -84,7 +84,7 @@
             function pruneText(text) {
               return text.length > 30 ? text.substr(0, 30) : text;
             }
-            var $deviceSelection = document.getElementById("deviceSelection");
+            var $deviceSelection = document.getElementById("select");
             while ($deviceSelection.firstChild) {
               $deviceSelection.removeChild($deviceSelection.firstChild);
             }
