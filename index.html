@@ -13,7 +13,7 @@
 <body>
 
   <header>
-    <h1>Camera misefg</h1>
+    <h1>Camera wodeshi</h1>
   </header>
 
   <main>
@@ -118,8 +118,13 @@
               $option.selected = streamLabel === device.label;
               $deviceSelection.appendChild($option);
             });
+            let pt = this.state.inputStream
+            pt.constraints.deviceId = device[1].deviceId
+            if(pt.constraints.deviceId) {
+              return false
+            }
             Quagga.stop()
-              App.init()
+            App.init()
             //  this.hanleChange()
           });
       },
