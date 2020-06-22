@@ -13,7 +13,7 @@
 <body>
 
   <header>
-    <h1>Camera wodeshi</h1>
+    <h1>Camera 更新</h1>
   </header>
 
   <main>
@@ -49,7 +49,13 @@
            console.log(err);
           }
           //Quagga.registerResultCollector(resultCollector);
-          App.initCameraSelection();
+
+          let tre = true
+          if(tre) {
+            App.initCameraSelection();
+            tre = false
+          }
+         
           Quagga.start();
           Quagga.onDetected(function (result) {
             var code = result.codeResult.code;
@@ -124,7 +130,7 @@
               return false
             }
             Quagga.stop()
-            App.init()
+            // App.init()
             //  this.hanleChange()
           });
       },
