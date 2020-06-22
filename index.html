@@ -23,11 +23,11 @@
         
       </select>
     </div>
-
+<ul class="collector"></ul>
     <video id="video" autoplay playsinline></video>
     <div class="hello"></div>
    
-      <ul class="collector"></ul>
+      
 
   </main>
 
@@ -95,11 +95,11 @@
           },
           locate: true
         },
-
+    
       initCameraSelection: function () {
        let self = this
         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-        let pt = this.state.inputStream
+       
         return Quagga.CameraAccess.enumerateVideoDevices()
           .then(function (devices) {
              function pruneText(text) {
@@ -116,16 +116,24 @@
               $option.selected = streamLabel === device.label;
               $deviceSelection.appendChild($option);
             });
-            pt.constraints.deviceId = devices[1].deviceId
-              Quagga.stop();
-              self.init();
+          
+             this.hanleChange()
           });
+      },
+      hanleChange: function (){
+        this.select.onchange = function (e) {
+          let value = e.target.value
+          let pt = this.state.inputStream
+          pt.constraints.deviceId = value
+          
+          self.init();
+        }
       }
     }
     window.onload = function () {
     
       App.init()
-        App.initCameraSelection()
+       
       
     }
   </script>
