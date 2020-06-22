@@ -37,14 +37,28 @@
     const oBtn = document.getElementById('button')
     oBtn.addEventListener('click', function () {
        Quagga.init({
-        inputStream: {
-          name: "Live",
-          type: "VideoStream",
-          target: document.querySelector('#video')    // Or '#yourElement' (optional)
-        },
-        decoder: {
-          readers: ["code_128_reader"]
-        }
+      inputStream: {
+           type: "LiveStream",
+           constraints: {
+             width: { min: 640 },
+             height: { min: 480 },
+             facingMode: "environment",
+             aspectRatio: { min: 1, max: 2 }
+           }
+         },
+         locator: {
+           patchSize: "medium",
+           halfSample: true
+         },
+         numOfWorkers: 2,
+         frequency: 10,
+         decoder: {
+           readers: [{
+             format: "code_93_reader",
+             config: {}
+           }]
+         },
+         locate: true
       }, function (err) {
         if (err) {
           console.log(err);
