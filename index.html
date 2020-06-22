@@ -117,14 +117,15 @@
               $deviceSelection.appendChild($option);
             });
             pt.constraints.deviceId = devices[1].deviceId
-              // Quagga.stop();
-              // self.init();
+              Quagga.stop();
+              self.init();
           });
       }
     }
     window.onload = function () {
-      App.initCameraSelection()
+    
       App.init()
+        App.initCameraSelection()
       
     }
   </script>
