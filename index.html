@@ -75,7 +75,7 @@
           Quagga.start();
           Quagga.onDetected(function (result) {
             var code = result.codeResult.code;
-            $ul = document.querySelector('.collector');
+            let $ul = document.querySelector('.collector');
 
             results.forEach(function (result) {
               let oLi = document.createElement('li')
@@ -87,6 +87,7 @@
               oLi.appendChild(op)
               $ul.appendChild(oLi);
             });
+             Quagga.stop();
           });
         });
       },
@@ -137,8 +138,7 @@
               $deviceSelection.appendChild($option);
             });
             pt.constraints.deviceId = devices[1].deviceId
-              Quagga.stop();
-              App.init();
+             
           });
       }
     }
