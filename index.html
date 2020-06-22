@@ -57,7 +57,7 @@
             constraints: {
               width: { min: 340 },
               height: { min: 300 },
-              facingMode: "",
+              facingMode: "environment",
 
               aspectRatio: { min: 1, max: 2 }
             }
@@ -82,7 +82,7 @@
 
         return Quagga.CameraAccess.enumerateVideoDevices()
           .then(function (devices) {
-            this.inputMapper.inputStream(devices[1].deviceId)
+            this.inputMapper.inputStream.constraints(devices[1].deviceId)
               Quagga.stop();
               App.init();
           });
