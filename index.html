@@ -13,7 +13,7 @@
 <body>
 
   <header>
-    <h1>Camera s</h1>
+    <h1>Camera gengx</h1>
   </header>
 
   <main>
@@ -118,7 +118,8 @@
               $option.selected = streamLabel === device.label;
               $deviceSelection.appendChild($option);
             });
-          
+            Quagga.stop()
+              App.init()
             //  this.hanleChange()
           });
       },
@@ -133,9 +134,9 @@
       }
     }
     window.onload = function () {
-      App.initCameraSelection()
+     
       App.init()
-      
+       App.initCameraSelection()
       
     }
   </script>
