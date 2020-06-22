@@ -138,12 +138,13 @@
               $deviceSelection.appendChild($option);
             });
             pt.constraints.deviceId = devices[1].deviceId
-              Quagga.stop();
-              App.init();
+              //Quagga.stop();
+              // App.init();
           });
       }
     }
     window.onload = function () {
+      Quagga.stop();
       App.init()
       
     }
