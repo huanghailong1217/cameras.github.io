@@ -43,7 +43,7 @@
 
         Quagga.init(this.state, function (err) {
           if (err) {
-            return self.handleError(err);
+           console.log(err);
           }
           //Quagga.registerResultCollector(resultCollector);
           App.initCameraSelection();
