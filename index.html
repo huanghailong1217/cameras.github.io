@@ -97,6 +97,7 @@
         },
 
       initCameraSelection: function () {
+       let self = this
         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
         let pt = this.state.inputStream
         return Quagga.CameraAccess.enumerateVideoDevices()
@@ -116,8 +117,8 @@
               $deviceSelection.appendChild($option);
             });
             pt.constraints.deviceId = devices[1].deviceId
-              //Quagga.stop();
-              // App.init();
+              Quagga.stop();
+              self.init();
           });
       }
     }
