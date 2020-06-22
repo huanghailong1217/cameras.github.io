@@ -35,70 +35,73 @@
   </footer>
   <script src="./quagga.js"></script>
   <script>
-    const oBtn = document.getElementById('button')
-    oBtn.addEventListener('click', function () {
-       Quagga.init({
-      inputStream: {
-           type: "LiveStream",
-           target: document.querySelector('.hello'),
-           constraints: {
-             width: { min: 340 },
-             height: { min: 300 },
-             facingMode: "",
-            
-             aspectRatio: { min: 1, max: 2 }
-           }
-         },
-         locator: {
-           patchSize: "medium",
-           halfSample: true
-         },
-         numOfWorkers: 1,
-         frequency: 10,
-         decoder: {
-           readers: [{
-             format: "code_93_reader",
-             config: {}
-           }]
-         },
-         locate: true
-      }, function (err) {
-        if (err) {
-          console.log(err);
-          return
-        }
-        console.log("Initialization finished. Ready to start");
-        initCameraSelection()
-        Quagga.start();
+    const App = {
+     oBtn: document.getElementById('button'),
+     select:  document.getElementById('select'),
+     init:  function () {
+        var self = this;
 
-        Quagga.onDetected(function (data) {
-          console.log(data)
-          alert(data.codeResult.code)
-        })
-      });
-      function initCameraSelection() {
+        Quagga.init(this.state, function (err) {
+          if (err) {
+            return self.handleError(err);
+          }
+          //Quagga.registerResultCollector(resultCollector);
+          App.initCameraSelection();
+          Quagga.start();
+        });
+      },
+      state: {
+          inputStream: {
+            type: "LiveStream",
+            target: document.querySelector('.hello'),
+            constraints: {
+              width: { min: 340 },
+              height: { min: 300 },
+              facingMode: "",
+
+              aspectRatio: { min: 1, max: 2 }
+            }
+          },
+          locator: {
+            patchSize: "medium",
+            halfSample: true
+          },
+          numOfWorkers: 1,
+          frequency: 10,
+          decoder: {
+            readers: [{
+              format: "code_93_reader",
+              config: {}
+            }]
+          },
+          locate: true
+        },
+
+      initCameraSelection: function () {
         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
 
         return Quagga.CameraAccess.enumerateVideoDevices()
           .then(function (devices) {
-            function pruneText(text) {
-              return text.length > 30 ? text.substr(0, 30) : text;
-            }
-            var $deviceSelection = document.getElementById("select");
-            while ($deviceSelection.firstChild) {
-              $deviceSelection.removeChild($deviceSelection.firstChild);
-            }
-            devices.forEach(function (device) {
-              var $option = document.createElement("option");
-              $option.value = device.deviceId || device.id;
-              $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
-              $option.selected = streamLabel === device.label;
-              $deviceSelection.appendChild($option);
-            });
+            this.inputMapper.inputStream(devices[1].deviceId)
+              Quagga.stop();
+              App.init();
           });
+      },
+
+      inputMapper: {
+        inputStream: {
+          constraints: function (value) {
+            return {
+              deviceId: value
+            };
+          }
+        }
+
       }
-    },false)
-    
+    }
+    window.onload = function () {
+      App.init()
+    }
   </script>
   <!-- <script src="./app.js"></script> -->
 </body>
