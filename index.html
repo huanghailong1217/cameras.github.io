@@ -58,7 +58,7 @@
               width: { min: 340 },
               height: { min: 300 },
               facingMode: "environment",
-
+              deviceId: '',
               aspectRatio: { min: 1, max: 2 }
             }
           },
@@ -79,10 +79,24 @@
 
       initCameraSelection: function () {
         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-
+        let pt = this.state.inputStream
         return Quagga.CameraAccess.enumerateVideoDevices()
           .then(function (devices) {
-            this.inputMapper.inputStream.constraints(devices[1].deviceId)
+             function pruneText(text) {
+              return text.length > 30 ? text.substr(0, 30) : text;
+            }
+            var $deviceSelection = document.getElementById("select");
+            while ($deviceSelection.firstChild) {
+              $deviceSelection.removeChild($deviceSelection.firstChild);
+            }
+            devices.forEach(function (device) {
+              var $option = document.createElement("option");
+              $option.value = device.deviceId || device.id;
+              $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
+              $option.selected = streamLabel === device.label;
+              $deviceSelection.appendChild($option);
+            });
+            pt.constraints.deviceId = devices[1].deviceId
               Quagga.stop();
               App.init();
           });
@@ -101,6 +115,7 @@
     }
     window.onload = function () {
       App.init()
+      App.initCameraSelection()
     }
   </script>
   <!-- <script src="./app.js"></script> -->
