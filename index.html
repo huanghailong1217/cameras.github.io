@@ -87,7 +87,6 @@
               oLi.appendChild(op)
               $ul.appendChild(oLi);
             });
-             Quagga.stop();
           });
         });
       },
@@ -138,7 +137,8 @@
               $deviceSelection.appendChild($option);
             });
             pt.constraints.deviceId = devices[1].deviceId
-             
+              Quagga.stop();
+              App.init();
           });
       }
     }
