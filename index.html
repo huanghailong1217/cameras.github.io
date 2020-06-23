@@ -135,18 +135,52 @@
       }
     }
     window.onload = function () {
-      App.init()
-      let selects = document.querySelector('#select')
-      selects.addEventListener('change', App.hanleChange, false)
+      // App.init()
+      // let selects = document.querySelector('#select')
+      // selects.addEventListener('change', App.hanleChange, false)
       Quagga.onDetected(function (result) {
        
         var code = result.codeResult.code;
        
         
         Quagga.stop()
-        
-     
       });
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+          alert("enumerateDevices() not supported.");
+        }
+
+        navigator.mediaDevices.enumerateDevices().then(function (devices) {
+          alert(devices[2]); // 切换数组索引，看哪个是摄像头设备
+          Quagga.init({
+            inputStream: {
+              name: 'Live',
+              type: 'LiveStream',
+              target: document.querySelector('#interactive'),
+              constraints: {
+                facingMode: 'environment',
+                deviceId: devices[4].deviceId // 使用对应的设备id
+              },
+            },
+            locator: {
+              patchSize: 'medium',
+              halfSample: true,
+            },
+            numOfWorkers: 2,
+            decoder: {
+              readers: ['code_128_reader'],
+            },
+            locate: true,
+          }, (err) => {
+            if (err) {
+              return
+            }
+            Quagga.state()
+          })
+        }).catch(function (err) {
+          console.log(err.name + ": " + err.message);
+        });
+     
+ 
       
     }
   </script>
