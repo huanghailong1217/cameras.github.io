@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <h1>Camera 改变2</h1>
+    <h1>Camera 来了老弟</h1>
   </header>
 
   <main>
@@ -95,9 +95,10 @@
       initCameraSelection: function () {
        let self = this
         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-       
+        alert('来了')
         return Quagga.CameraAccess.enumerateVideoDevices()
           .then(function (devices) {
+            alert('来了老弟')
              let pt = this.state.inputStream
             pt.constraints.deviceId = device[1].deviceId
             
