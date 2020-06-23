@@ -19,7 +19,7 @@
 <body>
 
   <header>
-    <h1>Camera hosts</h1>
+    <h1>Camera gengx</h1>
   </header>
 
   <main>
@@ -150,14 +150,14 @@
       }
     }
     window.onload = function () {
-      alert('开始')
       App.init()
       Quagga.onDetected(function (result) {
-        alert(resultCollector)
+       
         var code = result.codeResult.code;
         let $ul = document.querySelector('.collector');
 
         results.forEach(function (result) {
+           alert(result)
           let oLi = document.createElement('li')
           let imgs = document.createElement('img')
           let op = document.createElement('p')
