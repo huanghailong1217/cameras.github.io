@@ -20,14 +20,14 @@
 <body>
 
   <header>
-    <h1>Camera 改变1</h1>
+    <h1>Camera 改变3</h1>
   </header>
 
   <main>
     <div class="controls">
       <button id="button">Get camera</button>
       <select id="select">
-        
+        <option value=""></option>
       </select>
     </div>
    <ul class="collector"></ul>
@@ -128,20 +128,22 @@
           let value = e.target.value
           let pt = this.state.inputStream
           pt.constraints.deviceId = value
-          
+          Quagga.stop()
           self.init();
         }
       }
     }
     window.onload = function () {
       App.init()
+      let selects = document.querySelector('#select')
+      selects.addEventListener('change', App.hanleChange, false)
       Quagga.onDetected(function (result) {
        
         var code = result.codeResult.code;
-        alert(code)
+       
         
         Quagga.stop()
-       
+        
      
       });
       
