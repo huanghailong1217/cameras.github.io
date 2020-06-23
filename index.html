@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <h1>Camera gal</h1>
+    <h1>Camera peter</h1>
   </header>
 
   <main>
@@ -138,13 +138,7 @@
       // App.init()
       // let selects = document.querySelector('#select')
       // selects.addEventListener('change', App.hanleChange, false)
-      Quagga.onDetected(function (result) {
-       
-        var code = result.codeResult.code;
-       
-        
-        Quagga.stop()
-      });
+     
         if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
           alert("enumerateDevices() not supported.");
         }
@@ -155,7 +149,7 @@
             inputStream: {
               name: 'Live',
               type: 'LiveStream',
-              target: document.querySelector('#interactive'),
+              target: document.querySelector('.hello'),
               constraints: {
                 facingMode: 'environment',
                 deviceId: devices[4].deviceId // 使用对应的设备id
@@ -167,7 +161,7 @@
             },
             numOfWorkers: 2,
             decoder: {
-              readers: ['code_128_reader'],
+              readers: ['code_93_reader'],
             },
             locate: true,
           }, (err) => {
@@ -180,7 +174,13 @@
           console.log(err.name + ": " + err.message);
         });
      
- 
+       Quagga.onDetected(function (result) {
+
+        var code = result.codeResult.code;
+       alert(code)
+
+        Quagga.stop()
+      });
       
     }
   </script>
