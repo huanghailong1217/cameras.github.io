@@ -19,7 +19,7 @@
 <body>
 
   <header>
-    <h1>Camera gengx</h1>
+    <h1>Camera code</h1>
   </header>
 
   <main>
@@ -154,10 +154,11 @@
       Quagga.onDetected(function (result) {
        
         var code = result.codeResult.code;
+        alert(code)
         let $ul = document.querySelector('.collector');
 
         results.forEach(function (result) {
-           alert(result)
+           
           let oLi = document.createElement('li')
           let imgs = document.createElement('img')
           let op = document.createElement('p')
