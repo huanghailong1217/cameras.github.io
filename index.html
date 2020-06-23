@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <h1>Camera 改变</h1>
+    <h1>Camera 改变1</h1>
   </header>
 
   <main>
@@ -48,6 +48,7 @@
     const App = {
      oBtn: document.getElementById('button'),
      select:  document.getElementById('select'),
+     onlyOne: true,
      init:  function () {
         var self = this;
 
@@ -59,7 +60,7 @@
 
       
          App.initCameraSelection();
-         
+         Quagga.start();
         });
       },
       state: {
@@ -114,7 +115,12 @@
               $option.selected = streamLabel === device.label;
               $deviceSelection.appendChild($option);
             });
-            Quagga.start();
+            if(onlyOne) {
+              self.onlyOne = false
+              Quagga.stop()
+              self.init()
+            }
+           
           });
       },
       hanleChange: function (){
