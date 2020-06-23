@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <h1>Camera codes</h1>
+    <h1>Camera 改变</h1>
   </header>
 
   <main>
@@ -45,28 +45,6 @@
   </footer>
   <script src="./quagga.js"></script>
   <script>
-      var resultCollector = Quagga.ResultCollector.create({
-          capture: true,
-          capacity: 20,
-          blacklist: [{
-            code: "WIWV8ETQZ1", format: "code_93"
-          }, {
-            code: "EH3C-%GU23RK3", format: "code_93"
-          }, {
-            code: "O308SIHQOXN5SA/PJ", format: "code_93"
-          }, {
-            code: "DG7Q$TV8JQ/EN", format: "code_93"
-          }, {
-            code: "VOFD1DB5A.1F6QU", format: "code_93"
-          }, {
-            code: "4SO64P4X8 U4YUU1T-", format: "code_93"
-          }],
-          filter: function (codeResult) {
-            // only store results which match this constraint
-            // e.g.: codeResult
-            return true;
-          }
-        });
     const App = {
      oBtn: document.getElementById('button'),
      select:  document.getElementById('select'),
@@ -81,7 +59,7 @@
 
       
          App.initCameraSelection();
-          Quagga.start();
+         
         });
       },
       state: {
@@ -121,7 +99,7 @@
           .then(function (devices) {
              let pt = this.state.inputStream
             pt.constraints.deviceId = device[1].deviceId
-            alert(pt.constraints.deviceId)
+            
              function pruneText(text) {
               return text.length > 30 ? text.substr(0, 30) : text;
             }
@@ -136,7 +114,7 @@
               $option.selected = streamLabel === device.label;
               $deviceSelection.appendChild($option);
             });
-           
+            Quagga.start();
           });
       },
       hanleChange: function (){
