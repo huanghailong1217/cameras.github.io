@@ -50,29 +50,9 @@
           }
           //Quagga.registerResultCollector(resultCollector);
 
-          let tre = true
-          if(tre) {
-            App.initCameraSelection();
-            tre = false
-          }
-         
+      
+         App.initCameraSelection();
           Quagga.start();
-          Quagga.onDetected(function (result) {
-            var code = result.codeResult.code;
-            let $ul = document.querySelector('.collector');
-
-            results.forEach(function (result) {
-              let oLi = document.createElement('li')
-              let imgs = document.createElement('img')
-              let op = document.createElement('p')
-              imgs.src = result.frame;
-              op.innerHTML = code + " (" + result.codeResult.format + ")"
-              oLi.appendChild(img)
-              oLi.appendChild(op)
-              $ul.appendChild(oLi);
-            });
-             Quagga.stop();
-          });
         });
       },
       state: {
@@ -129,9 +109,6 @@
             if(pt.constraints.deviceId) {
               return false
             }
-            Quagga.stop()
-            // App.init()
-            //  this.hanleChange()
           });
       },
       hanleChange: function (){
@@ -147,7 +124,23 @@
     window.onload = function () {
      
       App.init()
-       
+      Quagga.onDetected(function (result) {
+        var code = result.codeResult.code;
+        let $ul = document.querySelector('.collector');
+
+        results.forEach(function (result) {
+          let oLi = document.createElement('li')
+          let imgs = document.createElement('img')
+          let op = document.createElement('p')
+          imgs.src = result.frame;
+          op.innerHTML = code + " (" + result.codeResult.format + ")"
+          oLi.appendChild(img)
+          oLi.appendChild(op)
+          $ul.appendChild(oLi);
+             Quagga.stop();
+        });
+     
+      });
       
     }
   </script>
